@@ -1,0 +1,24 @@
+name: Checking coding convention
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  phpcs:
+    name: Run phpcs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer, phpunit, phpcs, phpcbf, cs2pr
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install
