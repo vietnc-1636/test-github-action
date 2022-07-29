@@ -4,6 +4,10 @@ set -eu pipefail
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 echo "Current branch is: $current_branch"
 
+if [ $current_branch != "main" ]; then
+    exit 1;
+fi
+
 echo "Start deploy!"
 echo "Step 1: Pull code latest from repository"
 
